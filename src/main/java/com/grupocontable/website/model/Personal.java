@@ -25,10 +25,10 @@ public class Personal implements Serializable {
     String nombres;
     String apellidos;
     String descripcion;
-    String tipo_relacion;
+    String cargo_profesion;
     String fotografia;
     String pais;
-    String personal_modulo;
+    String rol_personal;
 
 }
 

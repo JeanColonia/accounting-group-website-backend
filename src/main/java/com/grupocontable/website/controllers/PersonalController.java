@@ -46,10 +46,10 @@ public class PersonalController {
            obtenerPersonal.setNombres(personal.getNombres());
            obtenerPersonal.setApellidos(personal.getApellidos());
            obtenerPersonal.setDescripcion(personal.getDescripcion());
-           obtenerPersonal.setTipo_relacion(personal.getTipo_relacion());
+           obtenerPersonal.setCargo_profesion(personal.getCargo_profesion());
            obtenerPersonal.setFotografia(personal.getFotografia());
            obtenerPersonal.setPais(personal.getPais());
-           obtenerPersonal.setPersonal_modulo(personal.getPersonal_modulo());
+           obtenerPersonal.setRol_personal(personal.getRol_personal());
 
            personalService.guardarPersonal(obtenerPersonal);
            return new ResponseEntity<Personal>( obtenerPersonal,HttpStatus.OK);

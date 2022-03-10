@@ -45,9 +45,22 @@ public class CapacitacionController {
             obtenercapacitacion.setTitulo(capacitacion.getTitulo());
             obtenercapacitacion.setTipoCapacitacion(capacitacion.getTipoCapacitacion());
             obtenercapacitacion.setFecha(capacitacion.getFecha());
-            obtenercapacitacion.setDescripcion(capacitacion.getDescripcion());
+            obtenercapacitacion.setImagen(capacitacion.getImagen());
             obtenercapacitacion.setFgVirtual(capacitacion.getFgVirtual());
-            obtenercapacitacion.setServicio(capacitacion.getServicio());
+            obtenercapacitacion.setHoraInicio(capacitacion.getHoraInicio());
+            obtenercapacitacion.setHoraFin(capacitacion.getHoraFin());
+            obtenercapacitacion.setModalidad(capacitacion.getTipoCapacitacion());
+            obtenercapacitacion.setIntroduccion(capacitacion.getIntroduccion());
+            obtenercapacitacion.setObjetivo(capacitacion.getObjetivo());
+            obtenercapacitacion.setMetodologia(capacitacion.getMetodologia());
+            obtenercapacitacion.setRelatador(capacitacion.getRelatador());
+            obtenercapacitacion.setDescripcionRelatador(capacitacion.getDescripcionRelatador());
+            obtenercapacitacion.setBeneficios(capacitacion.getBeneficios());
+            obtenercapacitacion.setInversionPresencial(capacitacion.getInversionPresencial());
+            obtenercapacitacion.setInversionVirtual(capacitacion.getInversionVirtual());
+            obtenercapacitacion.setDescuentos(capacitacion.getDescuentos());
+            obtenercapacitacion.setUsuario(capacitacion.getUsuario());
+
 
             capacitacionService.agregarCapacitacion(obtenercapacitacion);
             return new ResponseEntity<Capacitacion>(obtenercapacitacion, HttpStatus.OK);
@@ -59,7 +72,8 @@ public class CapacitacionController {
 
 
     @DeleteMapping("/eliminarCapacitacion/{id}")
-    public void eliminarCapacitacion(Integer id){
+    public void eliminarCapacitacion(@PathVariable Integer id){
+
         capacitacionService.eliminarCapacitacion(id);
     }
 

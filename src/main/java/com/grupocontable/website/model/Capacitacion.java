@@ -1,5 +1,7 @@
 package com.grupocontable.website.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,12 +29,37 @@ public class Capacitacion implements Serializable {
     String tipoCapacitacion;
     @Column(name="fecha")
     String fecha;
-    @Column(name="descripcion")
-    String descripcion;
+    @Column(name="imagen")
+    String imagen;
     @Column(name="fg_virtual")
     String fgVirtual;
+    @Column(name="hora_inicio")
+    String horaInicio;
+    @Column(name="hora_fin")
+    String horaFin;
+    @Column(name="modalidad")
+    String modalidad;
+    @Column(name="introduccion")
+    String introduccion;
+    @Column(name="objetivo")
+    String objetivo;
+    @Column(name="metodologia")
+    String metodologia;
+    @Column(name="relatador")
+    String relatador;
+    @Column(name="descripcion_relatador")
+    String descripcionRelatador;
+    @Column(name="beneficios")
+    String beneficios;
+    @Column(name="inversion_presencial")
+    String inversionPresencial;
+    @Column(name="inversion_virtual")
+    String inversionVirtual;
+    @Column(name="descuentos")
+    String descuentos;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="fk_idservicio")
-    private Servicio servicio;
+    @JoinColumn(name="fk_id_usuario")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private Usuario usuario;
 }
