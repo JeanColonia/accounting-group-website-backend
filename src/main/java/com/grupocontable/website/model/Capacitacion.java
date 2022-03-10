@@ -45,10 +45,6 @@ public class Capacitacion implements Serializable {
     String objetivo;
     @Column(name="metodologia")
     String metodologia;
-    @Column(name="relatador")
-    String relatador;
-    @Column(name="descripcion_relatador")
-    String descripcionRelatador;
     @Column(name="beneficios")
     String beneficios;
     @Column(name="inversion_presencial")
@@ -57,6 +53,8 @@ public class Capacitacion implements Serializable {
     String inversionVirtual;
     @Column(name="descuentos")
     String descuentos;
+    @Column(name="dirigido_tipo_profesionales")
+    String dirigidoTipoProfesionales;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="fk_id_usuario")

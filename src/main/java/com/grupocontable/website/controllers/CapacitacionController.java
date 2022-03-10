@@ -53,13 +53,12 @@ public class CapacitacionController {
             obtenercapacitacion.setIntroduccion(capacitacion.getIntroduccion());
             obtenercapacitacion.setObjetivo(capacitacion.getObjetivo());
             obtenercapacitacion.setMetodologia(capacitacion.getMetodologia());
-            obtenercapacitacion.setRelatador(capacitacion.getRelatador());
-            obtenercapacitacion.setDescripcionRelatador(capacitacion.getDescripcionRelatador());
             obtenercapacitacion.setBeneficios(capacitacion.getBeneficios());
             obtenercapacitacion.setInversionPresencial(capacitacion.getInversionPresencial());
             obtenercapacitacion.setInversionVirtual(capacitacion.getInversionVirtual());
             obtenercapacitacion.setDescuentos(capacitacion.getDescuentos());
             obtenercapacitacion.setUsuario(capacitacion.getUsuario());
+            obtenercapacitacion.setDirigidoTipoProfesionales(capacitacion.getDirigidoTipoProfesionales());
 
 
             capacitacionService.agregarCapacitacion(obtenercapacitacion);
