@@ -32,7 +32,9 @@ public class Temario  {
     @JsonBackReference
     private Capacitacion capacitacion;
 
+    /*
     @OneToMany(cascade=CascadeType.ALL, mappedBy="temario", orphanRemoval = true)
     private List<ItemsTemario> itemTemario=new ArrayList<>();
+*/
 
 }

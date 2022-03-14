@@ -69,6 +69,4 @@ public class Capacitacion implements Serializable {
     @OneToMany(cascade=CascadeType.ALL, mappedBy="capacitacion",
     orphanRemoval = true)
     private List<Temario> temario=new ArrayList<>();
-
-
 }
