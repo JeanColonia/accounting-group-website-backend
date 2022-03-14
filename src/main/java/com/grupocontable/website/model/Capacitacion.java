@@ -1,15 +1,18 @@
 package com.grupocontable.website.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Data
@@ -59,5 +62,13 @@ public class Capacitacion implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="fk_id_usuario")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @ToString.Exclude
     private Usuario usuario;
+
+
+    @OneToMany(cascade=CascadeType.ALL, mappedBy="capacitacion",
+    orphanRemoval = true)
+    private List<Temario> temario=new ArrayList<>();
+
+
 }

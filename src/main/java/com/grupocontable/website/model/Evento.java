@@ -1,12 +1,13 @@
 package com.grupocontable.website.model;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.Hibernate;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 @Data
@@ -34,6 +35,7 @@ public class Evento implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="fk_idusuario")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @ToString.Exclude
     private Usuario usuario;
 
 }
