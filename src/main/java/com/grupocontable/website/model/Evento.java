@@ -1,5 +1,6 @@
 package com.grupocontable.website.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -7,35 +8,42 @@ import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Evento implements Serializable {
+public class Evento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
      @Column(name="id_evento")
     Integer idEvento;
 
-    @Column(name="nombre")
-    String nombre;
+    @Lob
+    @Column(columnDefinition = "LONGTEXT")
+    String titulo;
     @Column(name="fecha")
     String fecha;
-    @Column(name="descripcion")
-    String descripcion;
-    @Column(name="fotografia")
-    String fotografia;
-    @Column(name="fg_virtual")
-    String fg_virtual;
 
+
+    @Lob
+    @Column(columnDefinition = "LONGTEXT")
+    String descripcion;
+
+    @Column(name="imagen")
+    String fotografia;
+
+    LocalDateTime fechaRegistrada;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="fk_idusuario")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    @ToString.Exclude
+    private Modalidad modalidad_evento;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Usuario usuario;
 
 }

@@ -1,25 +1,28 @@
 package com.grupocontable.website.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import lombok.experimental.FieldDefaults;
-import org.hibernate.Hibernate;
+
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@FieldDefaults(level= AccessLevel.PRIVATE)
-public class Usuario   {
+public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name ="id_usuario")
     Integer idUsuario;
+
+    String nombres;
+    String apellidos;
+    String email;
+
     @Column(name ="nombre_usuario")
     String nombreUsuario;
     @Column(name ="tipo_usuario")
@@ -27,10 +30,11 @@ public class Usuario   {
     @Column(name ="pass")
     String pass;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name ="fk_idpersonal")
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    @ToString.Exclude
-    private Personal personal;
+    Boolean activo;
 
+    String imagenUsuario;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Set<Evento> evento = new LinkedHashSet<>();
 }

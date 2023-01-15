@@ -1,62 +1,61 @@
 package com.grupocontable.website.controllers;
 
+import com.grupocontable.website.model.Curso;
 import com.grupocontable.website.model.Temario;
+import com.grupocontable.website.service.CursoService;
 import com.grupocontable.website.service.TemarioService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("temario/api")
+@CrossOrigin("*")
 public class TemarioController {
-    private final TemarioService temarioService;
+private final TemarioService temarioService;
+private final CursoService cursoService;
+public TemarioController(TemarioService temarioService, CursoService cursoService){
+    this.temarioService = temarioService;
+    this.cursoService = cursoService;
+}
 
-    public TemarioController(TemarioService temarioService) {
-        this.temarioService = temarioService;
-    }
+@PostMapping("/")
+    public ResponseEntity<Temario> crearTemario(@RequestBody Temario temario){
+    Temario temarioSaved = temarioService.crearTemario(temario);
+    return ResponseEntity.ok(temarioSaved);
+}
 
-    @GetMapping("/listar")
-    public List<Temario> listar(){
-        return temarioService.listar();
-    }
+@PutMapping("/")
+    public Temario actualizarTemario(@RequestBody Temario temario){
+    return temarioService.actualizarTemario(temario);
+}
 
-    @GetMapping("/obtenerTemario/{id}")
-    public ResponseEntity<Temario> obtenerTemario(@PathVariable Integer id){
-        try{
-            Temario temario=temarioService.obtenerTemario(id);
-            return new ResponseEntity<Temario>(temario, HttpStatus.OK);
-        }catch(Exception e){
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
 
-    @PostMapping("/agregarTemario")
-    public void agregarTemario(@RequestBody Temario temario){
-        temarioService.agregarTemario(temario);
-    }
+@GetMapping("/")
+    public ResponseEntity<?> obtenerTemarios(){
+    return ResponseEntity.ok(temarioService.obtenerTemarios());
+}
 
-    @PutMapping("/actualizarTemario/{id}")
-    public ResponseEntity<?> actualizarTemario(@RequestBody Temario temario, @PathVariable Integer id){
-        try {
-            Temario getTemario=temarioService.obtenerTemario(id);
-            getTemario.setTitulo(temario.getTitulo());
-            getTemario.setDescripcion(temario.getDescripcion());
 
-            temarioService.agregarTemario(getTemario);
+@GetMapping("/{idTemario}")
+    public Temario obtenerTemario(@PathVariable("idTemario") Integer idTemario){
+    return temarioService.obtenerTemario(idTemario);
+}
 
-            return new ResponseEntity<Temario>(getTemario,HttpStatus.OK);
-        }catch(Exception e)
-        {
-            return new ResponseEntity<Temario>(HttpStatus.NOT_MODIFIED);
-        }
-    }
+@DeleteMapping("/{idTemario}")
+    public void eliminarTemario(@PathVariable("idTemario") Integer idTemario){
+    temarioService.eliminarTemario(idTemario);
+}
 
-    @DeleteMapping("/eliminarTemario/{id}")
-    public void eliminarTemario(@PathVariable Integer  id){
-        temarioService.eliminarTemario(id);
-    }
+@GetMapping("/curso/{idCurso}")
+    public ResponseEntity<?> obtenerTemarioPorExamen(@PathVariable("idCurso") Integer idCurso){
+    Curso curso = cursoService.obtenerCurso(idCurso);
+    Set<Temario> temarioDelCurso = curso.getTemario();
 
+    return ResponseEntity.ok(temarioDelCurso);
+}
 
 }

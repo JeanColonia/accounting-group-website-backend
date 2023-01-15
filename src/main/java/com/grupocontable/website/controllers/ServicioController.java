@@ -10,54 +10,40 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/servicio/api")
+@CrossOrigin("*")
 public class ServicioController {
-    private final ServicioService servicioService;
 
-    public ServicioController(ServicioService servicioService) {
-        this.servicioService = servicioService;
-    }
-
-    @GetMapping("/listar")
-    public List<Servicio> listar(){
-        return servicioService.listar();
-    }
-
-    @GetMapping("/obtenerServicio/{id}")
-    public ResponseEntity<Servicio> obtenerServicio(@PathVariable Integer id){
-        try{
-            Servicio obtenerservicio=servicioService.obtenerServicio(id);
-
-            return new ResponseEntity<Servicio>(obtenerservicio, HttpStatus.OK);
-        }catch(Exception e){
-            return new ResponseEntity<Servicio>(HttpStatus.NOT_FOUND);
+        private final ServicioService servicioService;
+        public ServicioController(ServicioService servicioService){
+            this.servicioService = servicioService;
         }
-    }
 
-    @PostMapping("/agregarServicio")
-    public void agregarServicio(@RequestBody Servicio servicio){
-         servicioService.agregarServicio(servicio);
-    }
+     @PostMapping()
+     public ResponseEntity<Servicio> agregarServicio(@RequestBody Servicio servicio){
+            Servicio servicioSaved = servicioService.crearServicio(servicio);
+            return ResponseEntity.ok(servicioSaved);
+     }
 
-    @PutMapping("/actualizarServicio/{id}")
-    public ResponseEntity<?> actualizarServicio(@RequestBody Servicio servicio, @PathVariable Integer id){
-        try{
-            Servicio obtenerservicio=servicioService.obtenerServicio(id);
-            obtenerservicio.setFotografia(servicio.getFotografia());
-            obtenerservicio.setTitulo(servicio.getTitulo());
-            obtenerservicio.setTipo(servicio.getTitulo());
-            obtenerservicio.setFecha(servicio.getFecha());
-            obtenerservicio.setDescripcion(servicio.getDescripcion());
-            obtenerservicio.setFgVirtual(servicio.getFgVirtual());
+     @PutMapping("/")
+     public Servicio actualizarServicio(@RequestBody Servicio servicio){
+            return servicioService.actualizarServicio(servicio);
+     }
 
-            servicioService.agregarServicio(obtenerservicio);
-            return new ResponseEntity<Servicio>(obtenerservicio, HttpStatus.OK);
-        }catch(Exception e){
-            return new ResponseEntity<Servicio>(HttpStatus.NOT_MODIFIED);
-        }
-    }
+     @GetMapping("/")
+    public ResponseEntity<?> obtenerServicios(){
+            return ResponseEntity.ok(servicioService.obtenerServicios());
+     }
 
-    @DeleteMapping("/eliminarServicio/{id}")
-    public void eliminarServicio(@PathVariable Integer id){
-        servicioService.eliminarServicio(id);
-    }
+
+     @GetMapping("/{idServicio}")
+    public Servicio obtenerServicio(@PathVariable("idServicio") Integer idServicio){
+            return servicioService.obtenerServicio(idServicio);
+     }
+
+
+     @DeleteMapping("/{idServicio}")
+    public void eliminarServicio(@PathVariable("idServicio") Integer idServicio){
+            servicioService.eliminarServicio(idServicio);
+     }
+
 }

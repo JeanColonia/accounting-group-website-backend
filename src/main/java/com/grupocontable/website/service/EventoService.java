@@ -5,28 +5,14 @@ import com.grupocontable.website.repository.EventoRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
-@Service
-public class EventoService {
-    private final EventoRepository eventoRepository;
 
-    public EventoService(EventoRepository eventoRepository) {
-        this.eventoRepository = eventoRepository;
-    }
+public interface EventoService {
 
-    public List<Evento> listar(){
-        return eventoRepository.findAll();
-    }
-
-    public Evento obtenerEvento(Integer idEvento){
-        return eventoRepository.findById(idEvento).get();
-    }
-
-    public void agregarEvento(Evento evento){
-        eventoRepository.save(evento);
-    }
-
-    public void eliminarEvento(Integer idEvento){
-        eventoRepository.deleteById(idEvento);
-    }
+    Evento crearEvento(Evento evento);
+    Evento actualizarEvento(Evento evento);
+    Set<Evento> obtenerEventos();
+    Evento obtenerEvento(Integer idEvento);
+    void eliminarEvento(Integer idEvento);
 }

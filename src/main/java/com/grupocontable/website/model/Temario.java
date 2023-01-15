@@ -1,16 +1,14 @@
 package com.grupocontable.website.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -20,21 +18,15 @@ public class Temario  {
      @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer idTemario;
 
-    @Column(name="titulo")
+    @Lob
+    @Column(columnDefinition = "LONGTEXT")
     String titulo;
-    @Column(name="descripcion")
-    String descripcion;
 
-    @ManyToOne(fetch= FetchType.LAZY)
-    @JoinColumn(name="fk_id_capacitacion")
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    @ToString.Exclude
-    @JsonBackReference
-    private Capacitacion capacitacion;
+    @Lob
+    @Column(columnDefinition = "LONGTEXT")
+    String descripcionTemario;
 
-    /*
-    @OneToMany(cascade=CascadeType.ALL, mappedBy="temario", orphanRemoval = true)
-    private List<ItemsTemario> itemTemario=new ArrayList<>();
-*/
+    @ManyToOne(fetch= FetchType.EAGER)
+    private Curso curso;
 
 }

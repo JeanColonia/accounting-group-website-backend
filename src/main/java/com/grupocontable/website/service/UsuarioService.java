@@ -5,28 +5,15 @@ import com.grupocontable.website.repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
-@Service
-public class UsuarioService {
-    private final UsuarioRepository usuarioRepository;
 
-    public UsuarioService(UsuarioRepository usuarioRepository) {
-        this.usuarioRepository = usuarioRepository;
-    }
+public interface UsuarioService {
 
-    public List<Usuario> listarUsuarios(){
-        return usuarioRepository.findAll();
-    }
+    Usuario agregarUsuario(Usuario usuario);
+    Usuario actualizarUsuario(Usuario usuario);
+    Set<Usuario> obtenerUsuarios();
+    Usuario obtenerUsuario(Integer idUsuario);
+    void eliminarUsuario(Integer idUsuario);
 
-    public Usuario obtenerUsuario(Integer id){
-        return usuarioRepository.findById(id).get();
-    }
-
-    public void agregarUsuario(Usuario usuario){
-         usuarioRepository.save(usuario);
-    }
-
-    public void eliminarUsuario(Integer id){
-        usuarioRepository.deleteById(id);
-    }
 }

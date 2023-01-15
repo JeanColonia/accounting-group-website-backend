@@ -1,33 +1,17 @@
 package com.grupocontable.website.service;
 
 import com.grupocontable.website.model.Servicio;
-import com.grupocontable.website.repository.ServicioRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
-@Service
-public class ServicioService {
-    private final ServicioRepository servicioRepository;
+import java.util.Set;
 
 
-    public ServicioService(ServicioRepository servicioRepository) {
-        this.servicioRepository = servicioRepository;
-    }
+public interface ServicioService {
 
-    public List<Servicio> listar(){
-        return servicioRepository.findAll();
-    }
-
-    public Servicio obtenerServicio(Integer id){
-        return servicioRepository.findById(id).get();
-    }
-
-    public void agregarServicio(Servicio servicio){
-        servicioRepository.save(servicio);
-    }
-
-    public void eliminarServicio(Integer id){
-        servicioRepository.deleteById(id);
-    }
+    Servicio crearServicio(Servicio servicio);
+    Servicio actualizarServicio(Servicio servicio);
+    Set<Servicio> obtenerServicios();
+    Servicio obtenerServicio(Integer idServicio);
+    void eliminarServicio(Integer idServicio);
 }
