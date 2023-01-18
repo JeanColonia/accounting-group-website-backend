@@ -47,6 +47,11 @@ public class Curso {
     @Lob
     @Column(columnDefinition = "LONGTEXT")
     String linkCarrito;
+
+
+    String inversion;
+
+    String estado;
     @ManyToOne(fetch = FetchType.EAGER)
     private Modalidad modalidad;
     @ManyToOne(fetch = FetchType.EAGER)

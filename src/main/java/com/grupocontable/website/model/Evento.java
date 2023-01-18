@@ -38,6 +38,8 @@ public class Evento {
     @Column(name="imagen")
     String fotografia;
 
+    String estado;
+
     LocalDateTime fechaRegistrada;
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
