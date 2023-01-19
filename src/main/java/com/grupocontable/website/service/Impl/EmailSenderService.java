@@ -10,11 +10,10 @@ public class EmailSenderService {
 
     @Autowired
     private JavaMailSender javaMailSender;
-
     public void sendEmail(String subject, String body){
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("jeancolonia123@gmail.com");
-        message.setTo("engshka123@gmail.com");
+        message.setTo("informes@grupocontable.pe");
         message.setText(body+ "\n"+" Mensaje enviado desde Grupo Contable Website");
         message.setSubject(subject);
         javaMailSender.send(message);
