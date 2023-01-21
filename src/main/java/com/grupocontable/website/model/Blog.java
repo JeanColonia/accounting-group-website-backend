@@ -39,6 +39,8 @@ public class Blog {
     LocalDateTime fechaRegistrada;
 
     String estado;
+    boolean mostrarAutor;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Usuario usuario;
