@@ -40,7 +40,7 @@ public class Blog {
 
     String estado;
 
-    Boolean mostrarAutor;
+    boolean mostrarAutor = false;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
