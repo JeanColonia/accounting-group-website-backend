@@ -44,4 +44,6 @@ public class Pagina {
 
 
     String imagenDescripcionTres;
+
+    boolean mostrarPagina=false;
 }
